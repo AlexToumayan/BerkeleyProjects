@@ -8,7 +8,7 @@ A:
 
 Q: What's something you felt proud of in your code, if anything?
 
-A:
+A: I've always felt limited as a mathematics major. And felt that its severely held me back as a software engineer. My favorite implementation was understanding that instead of moving items in an array by n+1 or n+m it is actually easier to leave space at the beginning of the array or end to add more or leave more items. if I'm being honest I was pissed at first, I understand that there is a ram problem and that things should run as efficient as possible. But as a mathematician I was mad we couldn't just move down plus 1 or back -1. That was probably my favorite portion of the project, overcoming my own ignorance.  
 
 Q: What's something that was particularly inelegant in your code, if anything?
 
@@ -16,15 +16,15 @@ A:
 
 Q: What did you learn by talking to your partner about writing ArrayDeque?
 
-A:
+A: That they used helped methods something I think would have made not only my array deque but my linked list deque easier as well. 
 
 Q: What do you wish you would have known before writing ArrayDeque, if anything?
 
-A:
+A: When we look at addlast and addfirst I would have enjoyed knowing that we should leave spaces open prior. Because while I found an extremely elegant solution in the end. I would have enjoyed not spending so much time on the solution. 
 
 Q: If you wrote ArrayDeque again, what would you do differently, if anything?
 
-A:
+A: Id try my best to implement a helper function to help me iterate through the solution quicker. I find my biggest weakness has been understanding the helper function. Even in 61a I struggled with it majorly. If I had the same opportunity now I think id be able to provide a much better solution with a proper helper function. 
 
 -----
 
@@ -36,19 +36,19 @@ A:
 
 Q: What's something you felt proud of in your code, if anything?
 
-A:
+A: I enjoyed my node implementation, I find that tracking and finding the way nodes, and their placement work in the class is a strength of mine. I think my remove first remove last worked splendid and I enjoyed it a lot. 
 
 Q: What's something that was particularly inelegant in your code, if anything?
 
-A:
+A: The main reason is because while I did the project, and it worked very well. My implementation was sloppy and poor. I think my recursive helper could have worked a bit better. 
 
 Q: What did you learn by talking to your partner about writing LinkedListDeque?
 
-A:
+A: While we didn't directly explain and showcase our code, she made it extremely apparent that there is a quick and elegant way to the linked list deque. I learned that through elegant helpers we can get rid of consistent iteration and make the code far less complex and use far less memory. While the memory might not be an issue on such a short project, on ones where code layers on one another for pages and pages and pages, it would be far more difficult in the future. 
 
 Q: What do you wish you would have known before writing LinkedListDeque, if anything?
 
-A:
+A: Prior to working on the project, i had the same question, if I could have used a helper function instead I think I would have been far more quick to understanding the project. I did the project over summer so it was much easier for me this semester than it was last. But I still struggled with linked list deque more than I did array deque. 
 
 Q: If you wrote LinkedListDeque again, what would you do differently, if anything?
 

@@ -22,6 +22,8 @@ public class TimeAList {
     }
 
     public static void timeAListConstruction() {
-        // TODO: YOUR CODE HERE
+        // TODO: YOUR CODE
+        AList aList = new AList();
+        printTimingTable();
     }
 }
