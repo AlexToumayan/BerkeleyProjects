@@ -22,7 +22,7 @@ public class TimeSLList {
     }
 
     public static void timeGetLast() {
-        // TODO: YOUR CODE HERE
+
     }
 
 }
