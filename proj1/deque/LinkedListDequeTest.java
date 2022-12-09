@@ -4,136 +4,102 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-/** Performs some basic linked list tests. */
+/** Performs some basic linked list deque tests. */
 public class LinkedListDequeTest {
 
+    /** You MUST use the variable below for all of your tests. If you test
+     * using a local variable, and not this static variable below, the
+     * autograder will not grade that test. If you would like to test
+     * LinkedListDeques with types other than Integer (and you should),
+     * you can define a new local variable. However, the autograder will
+     * not grade that test. Please do not import java.util.Deque here!*/
+
+    public static Deque<Integer> lld = new LinkedListDeque<Integer>();
+
     @Test
-    /** Adds a few things to the list, checking isEmpty() and size() are correct,
-     * finally printing the results.
+    /** Adds a few things to the list, checks that isEmpty() is correct.
+     * This is one simple test to remind you how junit tests work. You
+     * should write more tests of your own.
      *
      * && is the "and" operation. */
     public void addIsEmptySizeTest() {
+        lld = new LinkedListDeque<Integer>();
+		assertTrue("A newly initialized LLDeque should be empty", lld.isEmpty());
+		lld.addFirst(0);
 
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        /*
-        LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
+        assertFalse("lld1 should now contain 1 item", lld.isEmpty());
+        lld = new LinkedListDeque<Integer>(); //Assigns lld equal to a new, clean LinkedListDeque!
 
-		assertTrue("A newly initialized LLDeque should be empty", lld1.isEmpty());
-		lld1.addFirst("front");
 
-		// The && operator is the same as "and" in Python.
-		// It's a binary operator that returns true if both arguments true, and false otherwise.
-        assertEquals(1, lld1.size());
-        assertFalse("lld1 should now contain 1 item", lld1.isEmpty());
-
-		lld1.addLast("middle");
-		assertEquals(2, lld1.size());
-
-		lld1.addLast("back");
-		assertEquals(3, lld1.size());
-
-		System.out.println("Printing out deque: ");
-		lld1.printDeque();
-		*/
     }
 
+    /** Adds an item, removes an item, and ensures that dll is empty afterwards. */
     @Test
-    /** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
     public void addRemoveTest() {
-
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        /*
-        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
-		// should be empty
-		assertTrue("lld1 should be empty upon initialization", lld1.isEmpty());
-
-		lld1.addFirst(10);
-		// should not be empty
-		assertFalse("lld1 should contain 1 item", lld1.isEmpty());
-
-		lld1.removeFirst();
-		// should be empty
-		assertTrue("lld1 should be empty after removal", lld1.isEmpty());
-        */
+        lld.addFirst(1);
+        assertEquals(1,lld.size());
+        int removed=lld.removeFirst();
+        assertEquals(1, removed);
+        assertEquals(new LinkedListDeque<Integer>(), lld);
+        assertTrue("lld should now be empty", lld.isEmpty());
+        lld = new LinkedListDeque<Integer>();
     }
-
+    /** Make sure that removing from an empty LinkedListDeque does nothing */
     @Test
-    /* Tests removing from an empty deque */
     public void removeEmptyTest() {
+        Deque<Integer> copy=lld;
+        lld.removeLast();
+        assertEquals(copy, lld);
+        lld = new LinkedListDeque<Integer>();
+    }
+    /** Make sure your LinkedListDeque also works on non-Integer types */
+    @Test
+    public void multipleParamsTest() {
+        Deque<String> stringtest=new LinkedListDeque<>();
+        stringtest.addLast("amogus");
+        assertEquals(stringtest.get(0), "amogus");
+    }
+    /** Make sure that removing from an empty LinkedListDeque returns null */
+    @Test
+    public void emptyNullReturn() {
+        lld = new LinkedListDeque<Integer>();
+        assertEquals(null, lld.removeFirst());
+    }
+    /** TODO: Write tests to ensure that your implementation works for really large
+     * numbers of elements, and test any other methods you haven't yet tested!
+     */
+    @Test
+    public void testgets() {
+        lld.addLast(1);
+        lld.addLast(2);
+        lld.addLast(3);
+        int got=lld.get(1);
+        assertEquals(2, got);
+        lld = new LinkedListDeque<Integer>();
 
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        /*
-        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
-        lld1.addFirst(3);
+    }
+    @Test
+    public void testgets2() {
+        lld.addFirst(1);
+        lld.addFirst(2);
+        lld.addFirst(3);
+        int got=lld.get(1);
+        assertEquals(2, got);
+        lld = new LinkedListDeque<Integer>();
 
-        lld1.removeLast();
-        lld1.removeFirst();
-        lld1.removeLast();
-        lld1.removeFirst();
-
-        int size = lld1.size();
-        String errorMsg = "  Bad size returned when removing from empty deque.\n";
-        errorMsg += "  student size() returned " + size + "\n";
-        errorMsg += "  actual size() returned 0\n";
-
-        assertEquals(errorMsg, 0, size);
-        */
     }
 
     @Test
-    /* Check if you can create LinkedListDeques with different parameterized types*/
-    public void multipleParamTest() {
+    public void testremove(){
+        lld.addLast(1);
+        lld.addLast(2);
+        lld.addLast(3);
+        int removed=lld.removeLast();
+        assertEquals(3, removed);
+        assertNull(lld.get(2));
+        lld.addFirst(0);
+        lld.addLast(3);
+        assertTrue(lld.get(3)==3);
 
-        /*
-        LinkedListDeque<String>  lld1 = new LinkedListDeque<String>();
-        LinkedListDeque<Double>  lld2 = new LinkedListDeque<Double>();
-        LinkedListDeque<Boolean> lld3 = new LinkedListDeque<Boolean>();
-
-        lld1.addFirst("string");
-        lld2.addFirst(3.14159);
-        lld3.addFirst(true);
-
-        String s = lld1.removeFirst();
-        double d = lld2.removeFirst();
-        boolean b = lld3.removeFirst();
-        */
-    }
-
-    @Test
-    /* check if null is return when removing from an empty LinkedListDeque. */
-    public void emptyNullReturnTest() {
-
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        /*
-        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
-
-        boolean passed1 = false;
-        boolean passed2 = false;
-        assertEquals("Should return null when removeFirst is called on an empty Deque,", null, lld1.removeFirst());
-        assertEquals("Should return null when removeLast is called on an empty Deque,", null, lld1.removeLast());
-
-        */
-    }
-
-    @Test
-    /* Add large number of elements to deque; check if order is correct. */
-    public void bigLLDequeTest() {
-
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        /*
-        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
-        for (int i = 0; i < 1000000; i++) {
-            lld1.addLast(i);
-        }
-
-        for (double i = 0; i < 500000; i++) {
-            assertEquals("Should have the same value", i, (double) lld1.removeFirst(), 0.0);
-        }
-
-        for (double i = 999999; i > 500000; i--) {
-            assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
-        }
-
-        */
     }
 }

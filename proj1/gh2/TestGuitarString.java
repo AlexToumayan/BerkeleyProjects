@@ -1,7 +1,7 @@
 package gh2;
 
 /* Imports the required audio library from the
- * edu.princeton.cs.introcs package. */
+ * edu.princeton.cs.algs4 package. */
 import edu.princeton.cs.algs4.StdAudio;
 
 import org.junit.Test;
@@ -47,7 +47,6 @@ public class TestGuitarString  {
         s.pluck();
         double sample1 = s.sample();
         assertNotEquals("After plucking, your samples should not be 0.", 0.0, sample1);
-
         s.tic();
         assertNotEquals("After tic(), your samples should not stay the same.", sample1, s.sample());
     }
