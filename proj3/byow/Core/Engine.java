@@ -2,6 +2,7 @@ package byow.Core;
 
 import byow.TileEngine.TERenderer;
 import byow.TileEngine.TETile;
+import byow.TileEngine.Tileset;
 
 public class Engine {
     TERenderer ter = new TERenderer();
@@ -14,6 +15,17 @@ public class Engine {
      * including inputs from the main menu.
      */
     public void interactWithKeyboard() {
+        TETile[][] world = new TETile[WIDTH][HEIGHT];
+
+        ter.initialize(WIDTH, HEIGHT);
+
+        for (int i=0; i < WIDTH; i++) {
+            for (int j=0; j < HEIGHT; j++) {
+                world[i][j] = Tileset.FLOOR;
+            }
+        }
+
+        ter.renderFrame(world);
     }
 
     /**
