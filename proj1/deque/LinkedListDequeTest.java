@@ -24,8 +24,8 @@ public class LinkedListDequeTest {
      * && is the "and" operation. */
     public void addIsEmptySizeTest() {
         lld = new LinkedListDeque<Integer>();
-		assertTrue("A newly initialized LLDeque should be empty", lld.isEmpty());
-		lld.addFirst(0);
+        assertTrue("A newly initialized LLDeque should be empty", lld.isEmpty());
+        lld.addFirst(0);
 
         assertFalse("lld1 should now contain 1 item", lld.isEmpty());
         lld = new LinkedListDeque<Integer>(); //Assigns lld equal to a new, clean LinkedListDeque!
