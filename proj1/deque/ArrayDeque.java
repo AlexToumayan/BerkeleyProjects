@@ -1,13 +1,38 @@
 package deque;
 
+import java.sql.Array;
 import java.util.Comparator;
+import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
     private int size;
     private T[] items;
     private int n_last;
     private int n_first;
     private T[] copy;
+
+    public <T> ArrayDeque(Comparator<T> c) {
+
+    }
+
+    public Iterator<T> iterator(){
+        return new ArraySetIterator();
+    }
+    private class ArraySetIterator implements Iterator<T> {
+        private int wizPos;
+        public ArraySetIterator() {
+            wizPos = 0;
+        }
+        public boolean hasNext() {
+            return wizPos < size;
+        }
+        public T next() {
+            T returnItem = get(wizPos);
+            wizPos += 1;
+            return returnItem;
+        }
+    }
+
 
     public ArrayDeque() {
         size = 0;
@@ -15,10 +40,6 @@ public class ArrayDeque<T> implements Deque<T> {
         n_first = 4;
         n_last = 5;
         return;
-    }
-
-    public <T> ArrayDeque(Comparator<T> c) {
-
     }
 
     @Override
