@@ -1,3 +1,4 @@
+
 package deque;
 import java.util.Iterator;
 public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
@@ -7,7 +8,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private int nFirst;
     private T[] copy;
 
-    public Iterator<T> iterator(){
+    public Iterator<T> iterator() {
         return new ArraySetIterator();
     }
     private class ArraySetIterator implements Iterator<T> {
@@ -120,7 +121,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             return false;
         }
         ArrayDeque slList = (ArrayDeque) o;
-        if (size != slList.size) return false;
+        if (size != slList.size) {
+            return false;
+        }
         int index = 0;
 
         while (index < size) {
@@ -133,14 +136,14 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     private void resizeLarger() {
-        copy=(T[]) new Object[items.length * 2];
+        copy = (T[]) new Object[items.length * 2];
         System.arraycopy(items, 0, copy, 0, size);
         nFirst = copy.length - 1;
         nLast = size;
         items = copy;
     }
-    private void resizeSmaller(){
-        copy=(T[]) new Object[items.length / 2];
+    private void resizeSmaller() {
+        copy = (T[]) new Object[items.length / 2];
         System.arraycopy(items, 0, copy, 0, size);
         nFirst = copy.length - 1;
         nLast = size;

@@ -1,37 +1,42 @@
+
 package deque;
 import java.util.Comparator;
-
-
-// As an attempt to become a more proficient software engineer I have tried my best to explain the process of each line of code.
+// @ educative.io as you can see from my 10+ prior git uploads I tried this problem several times on my own, after which I searched the internet for problems in my solution.
+// I want to disclose since we are meant to @ any sites that help us in problem-solving that I was walked through the errors in my max class and Comparator from an outside source.
+// I did not however, look at a definitive answer via git or other proxies.
 public class MaxArrayDeque<T> extends ArrayDeque<T> {
-    // The Comparator<T> given to the MaxArrayDeque in the constructor
-    private final Comparator<T> comparator;
+    private Comparator<T> comparison;
 
     public MaxArrayDeque(Comparator<T> c) {
-        this.comparator = c;
+        super();
+        comparison = c;
     }
 
     public T max() {
-        T max = null;
-        for (int i = 0; i < this.size(); i++) {
-            T item = this.get(i);
-            if (comparator.compare(item, max) > 0) {
-                max = item;
-            }
-        }
-        return max;
-    }
-
-    public T max(Comparator<T> comp) {
-        if (this.isEmpty()) {
+        if (isEmpty()) {
             return null;
         }
-        T max = this.get(0);
-        for (int i = 0; i < this.size(); i++) {
-            T current = this.get(i);
-            if (comp.compare(current, max) > 0) {
-                max = current;
+        T largestInteger = (T) get(0);
+        for (int i = 0; i < size(); i++) {
+            if (comparison.compare((T) get(i), largestInteger) > 0) {
+                largestInteger = (T) get(i);
             }
         }
-        return max;
-    }}
+        return largestInteger;
+    }
+
+    public T max(Comparator<T> c) {
+        if (isEmpty()) {
+            return null;
+        }
+        T largestInteger = (T) get(0);
+        for (int i = 0; i < size(); i++) {
+            if (c.compare((T) get(i), largestInteger) > 0) {
+                largestInteger = (T) get(i);
+            }
+        }
+        return largestInteger;
+    }
+}
+
+

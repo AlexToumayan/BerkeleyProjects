@@ -3,7 +3,7 @@ import java.util.Iterator;
 public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     public Iterator<T> iterator() {
         return new LinkedListIterator();
-}
+    }
     private class LinkedListIterator implements Iterator<T> {
         private int wizPos;
         public LinkedListIterator() {
@@ -20,7 +20,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     public class Node {
-        public T item;
+        private T item;
         public Node next;
         public Node last;
 
