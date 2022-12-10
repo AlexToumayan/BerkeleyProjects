@@ -26,7 +26,6 @@ public class ArrayDequeTest {
         ad = new LinkedListDeque<Integer>();
         assertTrue("A newly initialized adeque should be empty", ad.isEmpty());
         ad.addFirst(0);
-
         assertFalse("ad1 should now contain 1 item", ad.isEmpty());
         ad = new LinkedListDeque<Integer>(); //Assigns ad equal to a new, clean LinkedListDeque!
 

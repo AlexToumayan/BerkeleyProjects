@@ -8,10 +8,6 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
     private int n_first;
     private T[] copy;
 
-    public <T> ArrayDeque(Comparator<T> c) {
-
-    }
-
     public Iterator<T> iterator(){
         return new ArraySetIterator();
     }
@@ -59,12 +55,6 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
         size = size + 1;
         n_last = (n_last + 1) % items.length;
     }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
     @Override
     public int size() {
         return size;
