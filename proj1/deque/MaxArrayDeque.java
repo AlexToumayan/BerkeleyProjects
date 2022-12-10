@@ -1,8 +1,10 @@
 
 package deque;
 import java.util.Comparator;
-// @ educative.io as you can see from my 10+ prior git uploads I tried this problem several times on my own, after which I searched the internet for problems in my solution.
-// I want to disclose since we are meant to @ any sites that help us in problem-solving that I was walked through the errors in my max class and Comparator from an outside source.
+// @ educative.io as you can see from my 10+ prior git uploads I tried this problem several
+// times on my own, after which I searched the internet for problems in my solution.
+// I want to disclose since we are meant to @ any sites that help us in problem-solving
+// that I was walked through the errors in my max class and Comparator from an outside source.
 // I did not however, look at a definitive answer via git or other proxies.
 public class MaxArrayDeque<T> extends ArrayDeque<T> {
     private Comparator<T> comparison;

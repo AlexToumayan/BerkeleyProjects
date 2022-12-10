@@ -21,8 +21,8 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
     public class Node {
         private T item;
-        public Node next;
-        public Node last;
+        private Node next;
+        private Node last;
 
         private Node(T item, Node next, Node last) {
             this.item = item;
@@ -157,9 +157,9 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
             return false;
         }
 
-        int index=0;
+        int index = 0;
 
-        while (index<size) {
+        while (index < size) {
             if ((slList.get(index)).equals(this.get(index))) {
                 return false;
             }
