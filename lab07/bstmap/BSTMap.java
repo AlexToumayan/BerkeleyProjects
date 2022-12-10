@@ -1,6 +1,7 @@
 package bstmap;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.ArrayList;
 
 public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     private Node root;
@@ -103,4 +104,17 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     public V remove(K key, V value) {
         return null;
     }
+    public void printInOrder() {
+        printInOrder(root);
+    }
+
+    private void printInOrder(Node n) {
+        if (n == null) {
+            return;
+        }
+        printInOrder(n.A);
+        System.out.print(n.key + " ");
+        printInOrder(n.B);
+    }
+
 }
