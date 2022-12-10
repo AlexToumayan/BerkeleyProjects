@@ -21,9 +21,6 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
                 max = item;
             }
         }
-        if (max == null) {
-            return null;
-        }
         return max;
     }
 

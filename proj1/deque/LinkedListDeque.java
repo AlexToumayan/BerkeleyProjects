@@ -32,7 +32,7 @@ public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
         }
     }
 
-    private Node sentinel;
+    private final Node sentinel;
     private int size;
 
     public LinkedListDeque() {
