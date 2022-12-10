@@ -1,11 +1,10 @@
 package deque;
-import java.util.Comparator;
 import java.util.Iterator;
-public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private int size;
     private T[] items;
-    private int n_last;
-    private int n_first;
+    private int nLast;
+    private int nFirst;
     private T[] copy;
 
     public Iterator<T> iterator(){
@@ -29,31 +28,32 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
 
     public ArrayDeque() {
         size = 0;
+
         items = (T[]) new Object[8];
-        n_first = 4;
-        n_last = 5;
+        nFirst = 4;
+        nLast = 5;
         return;
     }
 
     @Override
     public void addFirst(T item) {
-        if (size==items.length) {
+        if (size == items.length) {
             resizeLarger();
         }
-        items[n_first] = item;
+        items[nFirst] = item;
         size = size + 1;
-        n_first = (n_first - 1) % items.length;
+        nFirst = (nFirst - 1) % items.length;
 
     }
 
     @Override
     public void addLast(T item) {
-        if (size==items.length) {
+        if (size == items.length) {
             resizeLarger();
         }
-        items[n_last] = item;
+        items[nLast] = item;
         size = size + 1;
-        n_last = (n_last + 1) % items.length;
+        nLast = (nLast + 1) % items.length;
     }
     @Override
     public int size() {
@@ -62,7 +62,7 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
 
     @Override
     public void printDeque() {
-        for (int i = (n_first + 1) % items.length; i != n_last; i = (i + 1) % items.length) {
+        for (int i = (nFirst + 1) % items.length; i != nLast; i = (i + 1) % items.length) {
             if (items[i] != null) {
                 System.out.print(items[i] + " ");
             }
@@ -75,12 +75,12 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
         if (size == 0) {
             return null;
         }
-        T temp = items[(n_first + 1) % items.length];
-        items[(n_first + 1) % items.length] = null;
+        T temp = items[(nFirst + 1) % items.length];
+        items[(nFirst + 1) % items.length] = null;
 
-        n_first = (n_first + 1) % items.length;
+        nFirst = (nFirst + 1) % items.length;
         size = size + 1;
-        if (size<items.length/4) {
+        if (size < items.length / 4) {
             resizeSmaller();
         }
         return temp;
@@ -91,12 +91,12 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
         if (size == 0) {
             return null;
         }
-        T temp = items[(n_last - 1)%items.length];
-        items[Math.floorMod(n_last - 1, items.length)] = null;
+        T temp = items[(nLast - 1) % items.length];
+        items[Math.floorMod(nLast - 1, items.length)] = null;
 
-        n_last = Math.floorMod(n_last - 1, items.length);
+        nLast = Math.floorMod(nLast - 1, items.length);
         size = size - 1;
-        if (size<items.length/4) {
+        if (size < items.length / 4) {
             resizeSmaller();
         }
         return temp;
@@ -108,7 +108,7 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
         if (index >= size || index < 0) {
             return null;
         }
-        return items[(index + n_first + 1) % items.length];
+        return items[(index + nFirst + 1) % items.length];
 
     }
 
@@ -121,9 +121,9 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
         }
         ArrayDeque slList = (ArrayDeque) o;
         if (size != slList.size) return false;
-        int index=0;
+        int index = 0;
 
-        while (index<size) {
+        while (index < size) {
             if ((slList.get(index)).equals(this.get(index))) {
                 return false;
             }
@@ -133,17 +133,17 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
     }
 
     private void resizeLarger() {
-        copy=(T[]) new Object[items.length*2];
-        System.arraycopy(items,0,copy,0,size);
-        n_first = copy.length - 1;
-        n_last = size;
+        copy=(T[]) new Object[items.length * 2];
+        System.arraycopy(items, 0, copy, 0, size);
+        nFirst = copy.length - 1;
+        nLast = size;
         items = copy;
     }
     private void resizeSmaller(){
-        copy=(T[]) new Object[items.length/2];
-        System.arraycopy(items,0,copy,0,size);
-        n_first = copy.length - 1;
-        n_last = size;
+        copy=(T[]) new Object[items.length / 2];
+        System.arraycopy(items, 0, copy, 0, size);
+        nFirst = copy.length - 1;
+        nLast = size;
         items = copy;
     }
 }

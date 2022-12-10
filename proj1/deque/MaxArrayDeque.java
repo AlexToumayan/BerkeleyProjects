@@ -1,8 +1,6 @@
 package deque;
-import java.util.Collection;
 import java.util.Comparator;
-import java.util.Collections;
-import java.util.Iterator;
+
 
 // As an attempt to become a more proficient software engineer I have tried my best to explain the process of each line of code.
 public class MaxArrayDeque<T> extends ArrayDeque<T> {
@@ -17,7 +15,7 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
         T max = null;
         for (int i = 0; i < this.size(); i++) {
             T item = this.get(i);
-            if (comparator.compare(item,max) > 0) {
+            if (comparator.compare(item, max) > 0) {
                 max = item;
             }
         }

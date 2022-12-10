@@ -64,9 +64,7 @@ public class ArrayDequeTest {
         ad = new LinkedListDeque<Integer>();
         assertEquals(null, ad.removeFirst());
     }
-    /** TODO: Write tests to ensure that your implementation works for really large
-     * numbers of elements, and test any other methods you haven't yet tested!
-     */
+
     @Test
     public void testgets() {
         ad.addLast(1);

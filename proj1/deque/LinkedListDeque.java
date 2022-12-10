@@ -1,8 +1,7 @@
 package deque;
 import java.util.Iterator;
-public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
-
-    public Iterator<T> iterator(){
+public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
+    public Iterator<T> iterator() {
         return new LinkedListIterator();
 }
     private class LinkedListIterator implements Iterator<T> {
@@ -154,7 +153,9 @@ public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
             return false;
         }
         LinkedListDeque slList = (LinkedListDeque) o;
-        if (size != slList.size) return false;
+        if (size != slList.size) {
+            return false;
+        }
 
         int index=0;
 
