@@ -18,9 +18,7 @@ import java.awt.Color;
 
 public class Tileset {
     public static final TETile AVATAR = new TETile('@', Color.white, Color.black, "you");
-    public static final TETile WALL = new TETile('#', new Color(216, 128, 128), Color.darkGray,
-            "wall");
-    public static final TETile FLOOR = new TETile('·', new Color(128, 192, 128), Color.black,
+    public static final TETile FLOOR = new TETile('·', new Color(255, 255, 255), Color.black,
             "floor");
     public static final TETile NOTHING = new TETile(' ', Color.black, Color.black, "nothing");
     public static final TETile GRASS = new TETile('"', Color.green, Color.black, "grass");
@@ -33,6 +31,16 @@ public class Tileset {
     public static final TETile SAND = new TETile('▒', Color.yellow, Color.black, "sand");
     public static final TETile MOUNTAIN = new TETile('▲', Color.gray, Color.black, "mountain");
     public static final TETile TREE = new TETile('♠', Color.green, Color.black, "tree");
+    public static final TETile LIGHT = new TETile('♦', new Color(255, 255, 0), Color.black, "light");
+    public static final TETile COIN = new TETile('¢', new Color(212, 175, 55), Color.black, "coin");
+    public static final TETile WALL = new TETile('O', Color.red,
+            Color.white, "WALL",
+            "/Users/alextoumayan/Desktop/CS61BFall2022/fa22-s1355/proj3/byow/TileEngine/Background.png");
+    public static final TETile fireAvatar = new TETile('O', Color.red,
+            Color.white, "you",
+            "/Users/alextoumayan/Desktop/CS61BFall2022/fa22-s1355/proj3/byow/TileEngine/Avatar.png");
+    public static final TETile UNKNOWN = new TETile(' ', Color.BLACK, Color.BLACK, "unknown");
+
 }
 
 

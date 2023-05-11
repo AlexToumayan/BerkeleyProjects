@@ -1,11 +1,13 @@
 package byow.InputDemo;
 
+import java.io.Serializable;
+
 /**
  * Created by hug.
  * Demonstrates how a single interface can be used to provide input
  * from they keyboard, from a random sequence, from a string, or whatever else.
  */
-public class DemoInputSource {
+public class DemoInputSource implements Serializable {
     private static final int KEYBOARD = 0;
     private static final int RANDOM = 1;
     private static final int STRING = 2;

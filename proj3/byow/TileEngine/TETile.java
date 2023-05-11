@@ -1,9 +1,13 @@
 package byow.TileEngine;
 
+
 import java.awt.Color;
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Random;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import edu.princeton.cs.algs4.StdDraw;
 import byow.Core.RandomUtils;
 
@@ -21,12 +25,19 @@ import byow.Core.RandomUtils;
  * to make your TETile class mutable, if you prefer.
  */
 
+
 public class TETile {
     private final char character; // Do not rename character or the autograder will break.
     private final Color textColor;
     private final Color backgroundColor;
     private final String description;
     private final String filepath;
+    private static final List<TETile> TILE_VALUES = new ArrayList<>();
+
+    public static List<TETile> values() {
+        return Collections.unmodifiableList(TILE_VALUES);
+    }
+
 
     /**
      * Full constructor for TETile objects.
@@ -43,6 +54,7 @@ public class TETile {
         this.backgroundColor = backgroundColor;
         this.description = description;
         this.filepath = filepath;
+        TILE_VALUES.add(this);
     }
 
     /**
@@ -59,8 +71,8 @@ public class TETile {
         this.backgroundColor = backgroundColor;
         this.description = description;
         this.filepath = null;
+        TILE_VALUES.add(this);
     }
-
     /**
      * Creates a copy of TETile t, except with given textColor.
      * @param t tile to copy
@@ -189,4 +201,27 @@ public class TETile {
 
         return copy;
     }
+    public static TETile byDescription(String description) {
+        for (TETile tile : values()) {
+            if (tile.description().equals(description)) {
+                return tile;
+            }
+        }
+
+        for (Field field : Tileset.class.getDeclaredFields()) {
+            try {
+                Object obj = field.get(null);
+                if (obj instanceof TETile) {
+                    TETile tile = (TETile) obj;
+                    if (tile.description().equals(description)) {
+                        return tile;
+                    }
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException("Unable to access Tileset field.", e);
+            }
+        }
+        throw new IllegalArgumentException("No tile found with the given description: " + description);
+    }
+
 }

@@ -57,8 +57,17 @@ public class MemoryGame {
     }
 
     public String generateRandomString(int n) {
-        //TODO: Generate random string of letters of length n
-        return null;
+        String string = "";
+        for (int i = 0; i < n; i++) {
+            int cIndex = this.rand.nextInt(CHARACTERS.length - 1);
+
+            returnString += CHARACTERS[cIndex];
+
+
+        }
+        System.out.println(returnString);
+
+        return string;
     }
 
     public void drawFrame(String s) {
@@ -72,10 +81,12 @@ public class MemoryGame {
 
         //TODO: If the game is not over, display encouragement, and let the user know if they
         // should be typing their answer or watching for the next round.
-        
+
 
         StdDraw.show();
     }
+
+
 
     public void flashSequence(String letters) {
         //TODO: Display each character in letters, making sure to blank the screen between letters
