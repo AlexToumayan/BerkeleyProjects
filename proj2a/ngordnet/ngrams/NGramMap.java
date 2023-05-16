@@ -18,9 +18,9 @@ public class NGramMap {
             BufferedReader wordsReader = new BufferedReader(new FileReader(wordsFilename));
             String line;
             while ((line = wordsReader.readLine()) != null) {
-                String[] tokens = line.split(",");
+                String[] tokens = line.split("\t");
                 if (tokens.length < 3) {
-                    continue; // Skip lines with fewer than 3 tokens
+                    continue;
                 }
                 String word = tokens[0];
                 int year = Integer.parseInt(tokens[1]);
@@ -38,7 +38,7 @@ public class NGramMap {
             while ((line = countsReader.readLine()) != null) {
                 String[] tokens = line.split(",");
                 if (tokens.length < 2) {
-                    continue; // Skip lines with fewer than 2 tokens
+                    continue;
                 }
                 int year = Integer.parseInt(tokens[0]);
                 double totalCount = Double.parseDouble(tokens[1]);
@@ -51,22 +51,23 @@ public class NGramMap {
         }
     }
 
-
     public TimeSeries countHistory(String word) {
         TimeSeries wordHistory = wordHistories.get(word);
         if (wordHistory != null) {
             return new TimeSeries(wordHistory, wordHistory.firstKey(), wordHistory.lastKey());
         }
-        return null;
+        return new TimeSeries();
     }
+
 
     public TimeSeries countHistory(String word, int startYear, int endYear) {
         TimeSeries wordHistory = wordHistories.get(word);
         if (wordHistory != null) {
             return new TimeSeries(wordHistory, startYear, endYear);
         }
-        return null;
+        return new TimeSeries();
     }
+
 
     public TimeSeries totalCountHistory() {
         int startYear = totalCountHistory.firstKey();
@@ -76,12 +77,25 @@ public class NGramMap {
 
 
     public TimeSeries weightHistory(String word) {
-        return wordHistories.get(word).dividedBy(totalCountHistory);
+        TimeSeries wordHistory = wordHistories.get(word);
+        if (wordHistory == null) {
+            wordHistory = new TimeSeries();
+        }
+        if (totalCountHistory == null) {
+            totalCountHistory = new TimeSeries();
+        }
+        return wordHistory.dividedBy(totalCountHistory);
     }
 
     public TimeSeries weightHistory(String word, int startYear, int endYear) {
         TimeSeries wordHistory = countHistory(word, startYear, endYear);
         TimeSeries totalHistory = totalCountHistory(startYear, endYear);
+        if (wordHistory == null) {
+            wordHistory = new TimeSeries();
+        }
+        if (totalHistory == null) {
+            totalHistory = new TimeSeries();
+        }
         return wordHistory.dividedBy(totalHistory);
     }
 
@@ -103,7 +117,13 @@ public class NGramMap {
         return sum;
     }
 
+
     private TimeSeries totalCountHistory(int startYear, int endYear) {
+        if (totalCountHistory == null) {
+            totalCountHistory = new TimeSeries();
+        }
         return new TimeSeries(totalCountHistory, startYear, endYear);
     }
 }
+
+
