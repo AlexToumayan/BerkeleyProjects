@@ -80,7 +80,6 @@ public class Engine {
                 }
             }
 
-            // Initialize the avatar object before updating its position
             this.avatar = new Avatar(avatarX, avatarY);
 
             world[avatar.getX()][avatar.getY()] = Tileset.fireAvatar;
@@ -284,7 +283,7 @@ public class Engine {
                 char key = Character.toLowerCase(StdDraw.nextKeyTyped());
                 boolean avatarMoved = false;
 
-                if (key == 'p') {
+                if (key == ':') {
                     saveGame();
                 } else if (key == 'w') {
                     int newX = avatar.getX();

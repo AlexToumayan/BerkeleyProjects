@@ -3,11 +3,11 @@ package deque;
 import java.util.Iterator;
 public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private int size;
-    public static final int  ORIGIN_SIZE = 8;
+    private int ORIGIN_SIZE = 8;
     private T[] items;
     private int N_LAST;
-    public static final int  FOUR = 4;
-    public static final int  FIVE = 5;
+    private int FOUR = 4;
+    private int FIVE = 5;
     private int N_FIRST;
     private T[] copy;
 
