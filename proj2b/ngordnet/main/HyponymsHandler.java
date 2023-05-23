@@ -39,9 +39,7 @@ public class HyponymsHandler extends NgordnetQueryHandler {
 
         for (String hyponym : allHyponyms) {
             TimeSeries wordHistory = ngm.countHistory(hyponym, startYear, endYear);
-            int count = wordHistory.values().stream()
-                    .mapToInt(Number::intValue)
-                    .sum();
+            int count = wordHistory.values().stream().mapToInt(Number::intValue).sum();
 
             if (count > 0) {
                 hyponymCounts.put(hyponym, count);
