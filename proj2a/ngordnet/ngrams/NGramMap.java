@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NGramMap {
+    private static final int TOKENS_LENGTH = 3;
+    private static final int COUNTS_TOKENS_LENGTH = 2;
     private Map<String, TimeSeries> wordHistories;
     private TimeSeries totalCountHistory;
 
@@ -19,7 +21,7 @@ public class NGramMap {
             String line;
             while ((line = wordsReader.readLine()) != null) {
                 String[] tokens = line.split("\t");
-                if (tokens.length < 3) {
+                if (tokens.length < TOKENS_LENGTH) {
                     continue;
                 }
                 String word = tokens[0];
@@ -37,7 +39,7 @@ public class NGramMap {
             BufferedReader countsReader = new BufferedReader(new FileReader(countsFilename));
             while ((line = countsReader.readLine()) != null) {
                 String[] tokens = line.split(",");
-                if (tokens.length < 2) {
+                if (tokens.length < COUNTS_TOKENS_LENGTH) {
                     continue;
                 }
                 int year = Integer.parseInt(tokens[0]);
