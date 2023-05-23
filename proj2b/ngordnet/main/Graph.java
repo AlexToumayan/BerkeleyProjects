@@ -13,12 +13,6 @@ public class Graph {
     }
 
     public void addEdge(int vertex, int otherVertex) {
-        while (vertex >= adjacencyList.size()) {
-            adjacencyList.add(new HashSet<>());
-        }
-        while (otherVertex >= adjacencyList.size()) {
-            adjacencyList.add(new HashSet<>());
-        }
         adjacencyList.get(vertex).add(otherVertex);
     }
 
@@ -33,23 +27,5 @@ public class Graph {
             }
         }
         return visited;
-    }
-
-    public Set<Integer> getNeighbors(int vertex) {
-        if (vertex < adjacencyList.size()) {
-            return new HashSet<>(adjacencyList.get(vertex));
-        } else {
-            return new HashSet<>();
-        }
-    }
-
-    public Set<Integer> getNodes() {
-        Set<Integer> nodes = new HashSet<>();
-        for (int i = 0; i < adjacencyList.size(); i++) {
-            if (!adjacencyList.get(i).isEmpty()) {
-                nodes.add(i);
-            }
-        }
-        return nodes;
     }
 }

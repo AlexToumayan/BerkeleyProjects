@@ -1,11 +1,8 @@
 package ngordnet.main;
 
 import edu.princeton.cs.algs4.In;
-import ngordnet.ngrams.NGramMap;
-import ngordnet.ngrams.TimeSeries;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class WordNet {
     private final Map<String, Set<Integer>> wordToIdsMap = new HashMap<>();
@@ -16,8 +13,8 @@ public class WordNet {
 
         parseSynsets(synsetsFile);
 
-        wordNetGraph = new Graph(idToWordsMap.size());
 
+        wordNetGraph = new Graph(idToWordsMap.size());
 
         parseHyponyms(hyponymsFile);
     }
@@ -50,10 +47,10 @@ public class WordNet {
             }
         }
     }
-
-    public Set<String> hyponyms(String word, NGramMap ngramMap, int startYear, int endYear, int k) {
+    public Set<String> hyponyms(String word) {
         Set<Integer> ids = wordToIdsMap.get(word);
         if (ids == null) {
+
             return new HashSet<>();
         }
         Set<Integer> reachableIds = wordNetGraph.reachable(ids);
@@ -61,28 +58,7 @@ public class WordNet {
         for (Integer id : reachableIds) {
             hyponyms.addAll(idToWordsMap.get(id));
         }
-
-
-        hyponyms.removeIf(hyponym -> sumTimeSeries(ngramMap.countHistory(hyponym, startYear, endYear)) == 0);
-
-
-        List<String> sortedHyponyms = hyponyms.stream()
-                .sorted((word1, word2) -> Long.compare(
-                        sumTimeSeries(ngramMap.countHistory(word2, startYear, endYear)),
-                        sumTimeSeries(ngramMap.countHistory(word1, startYear, endYear))))
-                .limit(k)
-                .sorted()
-                .collect(Collectors.toList());
-
-        return new HashSet<>(sortedHyponyms);
+        return hyponyms;
     }
 
-
-    private long sumTimeSeries(TimeSeries ts) {
-        long sum = 0;
-        for (Double count : ts.values()) {
-            sum += count;
-        }
-        return sum;
-    }
 }

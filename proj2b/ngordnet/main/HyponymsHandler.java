@@ -3,17 +3,15 @@ package ngordnet.main;
 import ngordnet.hugbrowsermagic.NgordnetQuery;
 import ngordnet.hugbrowsermagic.NgordnetQueryHandler;
 import ngordnet.ngrams.NGramMap;
+import ngordnet.ngrams.TimeSeries;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class HyponymsHandler extends NgordnetQueryHandler {
     private WordNet wn;
     private NGramMap ngm;
 
-    public HyponymsHandler (WordNet wn, NGramMap ngm) {
+    public HyponymsHandler(WordNet wn, NGramMap ngm) {
         this.wn = wn;
         this.ngm = ngm;
     }
@@ -21,26 +19,50 @@ public class HyponymsHandler extends NgordnetQueryHandler {
     @Override
     public String handle(NgordnetQuery q) {
         List<String> words = q.words();
+        Set<String> allHyponyms = new HashSet<>();
+
+        if (words.isEmpty()) {
+            return allHyponyms.toString();
+        }
+
+        allHyponyms.addAll(wn.hyponyms(words.get(0)));
+
+        for (int i = 1; i < words.size(); i++) {
+            allHyponyms.retainAll(wn.hyponyms(words.get(i)));
+        }
+
+        if (q.k() == 0) {
+            return new TreeSet<>(allHyponyms).toString();
+        }
+
         int startYear = q.startYear();
         int endYear = q.endYear();
-        int k = q.k();
+        Map<String, Integer> hyponymCounts = new HashMap<>();
 
-        Set<String> commonHyponyms = null;
-        for (String word : words) {
-            Set<String> hyponyms = wn.hyponyms(word, ngm, startYear, endYear, k);
-            if (hyponyms.isEmpty()) {
-                return "Word: " + word + " not found in WordNet.";
-            }
-            if (commonHyponyms == null) {
-                commonHyponyms = new HashSet<>(hyponyms);
-            } else {
-                commonHyponyms.retainAll(hyponyms);
+        for (String hyponym : allHyponyms) {
+            TimeSeries wordHistory = ngm.countHistory(hyponym, startYear, endYear);
+            int count = wordHistory.values().stream()
+                    .mapToInt(Number::intValue)
+                    .sum();
+
+            if (count > 0) {
+                hyponymCounts.put(hyponym, count);
             }
         }
 
+        Comparator<Map.Entry<String, Integer>> valueThenKeyComparator =
+                Map.Entry.<String, Integer>comparingByValue().reversed().thenComparing(Map.Entry.comparingByKey());
 
-        TreeSet<String> sortedHyponyms = new TreeSet<>(commonHyponyms);
+        PriorityQueue<Map.Entry<String, Integer>> pq =
+                new PriorityQueue<>(valueThenKeyComparator);
 
-        return sortedHyponyms.toString();
+        pq.addAll(hyponymCounts.entrySet());
+
+        Set<String> resultHyponyms = new TreeSet<>();
+        for (int i = 0; i < q.k() && !pq.isEmpty(); i++) {
+            resultHyponyms.add(pq.poll().getKey());
+        }
+
+        return resultHyponyms.toString();
     }
 }
