@@ -4,7 +4,6 @@ import ngordnet.hugbrowsermagic.NgordnetQuery;
 import ngordnet.hugbrowsermagic.NgordnetQueryHandler;
 import ngordnet.ngrams.NGramMap;
 import ngordnet.ngrams.TimeSeries;
-
 import java.util.*;
 
 public class HyponymsHandler extends NgordnetQueryHandler {
@@ -15,7 +14,6 @@ public class HyponymsHandler extends NgordnetQueryHandler {
         this.wn = wn;
         this.ngm = ngm;
     }
-
     @Override
     public String handle(NgordnetQuery q) {
         List<String> words = q.words();
