@@ -1,7 +1,10 @@
+package ngordnet.main;
+
 import ngordnet.hugbrowsermagic.NgordnetQuery;
 import ngordnet.hugbrowsermagic.NgordnetQueryHandler;
 import ngordnet.ngrams.NGramMap;
 import ngordnet.ngrams.TimeSeries;
+
 import java.util.*;
 
 public class HyponymsHandler extends NgordnetQueryHandler {
