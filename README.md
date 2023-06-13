@@ -32,4 +32,3 @@ Key Features:
 
 These projects demonstrate skills in Java, procedural generation, data structure implementation, algorithm development, and more. They showcase a deep understanding of OOP principles, efficient memory management, and software development best practices. 
 
-Note: The source code for these projects is proprietary and not publicly accessible. Please get in touch if you would like a code walkthrough or additional details on the project implementations.
