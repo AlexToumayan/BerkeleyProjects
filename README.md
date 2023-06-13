@@ -1,4 +1,4 @@
-# BerkeleyProjects
+# Berkeley Projects
 
 ### Project 2a: NGordnet (NGrams)
 
